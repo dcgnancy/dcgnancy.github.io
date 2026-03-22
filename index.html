@@ -197,39 +197,13 @@
     }
 
     /* ── BLOC PROBLÈME ── */
-    .problems-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-      margin-top: 3rem;
-    }
-
-    .problem-card {
-      background: var(--cream);
-      border-radius: 4px;
-      padding: 1.8rem 1.5rem;
-      border-left: 3px solid var(--rust);
-    }
-
-    .problem-icon {
-      font-size: 1.5rem;
-      margin-bottom: 0.8rem;
-      display: block;
-    }
-
-    .problem-card h3 {
-      font-family: 'Playfair Display', serif;
+    .problems-text {
       font-size: 1rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: var(--ink);
-    }
-
-    .problem-card p {
-      font-size: 0.85rem;
+      line-height: 1.75;
       color: var(--muted);
-      line-height: 1.6;
+      max-width: 60ch;
       font-weight: 300;
+      margin-top: 1.5rem;
     }
 
     /* ── BLOC SOLUTION ── */
@@ -499,7 +473,6 @@
     <p class="hero-label">Espace de révision</p>
     <h1>Tu révises.<br><em>Tu t'évalues.</em><br>Tu progresses.</h1>
     <p class="hero-desc">Des outils simples pour comprendre le cours, mémoriser les notions et vérifier ta progression — chapitre par chapitre.</p>
-    <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="btn btn-primary">Accéder aux quiz →</a>
   </section>
 
   <!-- ══ BLOC PROBLÈME ══ -->
@@ -507,33 +480,7 @@
     <p class="section-label">Le constat</p>
     <h2 class="section-title">Ce que vivent<br>beaucoup d'étudiants</h2>
 
-    <div class="problems-grid">
-
-      <div class="problem-card">
-        <span class="problem-icon">😶</span>
-        <h3>« Je ne sais pas où j'en suis »</h3>
-        <p>Difficile d'évaluer sa maîtrise d'un chapitre sans un retour objectif.</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-icon">😕</span>
-        <h3>« Je lis, mais je ne comprends pas »</h3>
-        <p>Le cours semble clair à la lecture, mais les raisonnements ne s'ancrent pas.</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-icon">😞</span>
-        <h3>« J'apprends, mais je n'arrive pas à appliquer »</h3>
-        <p>Connaître une définition ne suffit pas. Il faut s'entraîner à l'utiliser.</p>
-      </div>
-
-      <div class="problem-card">
-        <span class="problem-icon">😰</span>
-        <h3>« Je n'ai pas le temps de tout réviser »</h3>
-        <p>18 chapitres, c'est beaucoup. Sans méthode, on tourne en rond.</p>
-      </div>
-
-    </div>
+    <p class="problems-text">Difficile de savoir si on est vraiment prêt quand on révise seul. On lit le cours, on croit avoir compris, mais au moment de répondre à une question, ça bloque. On apprend des définitions sans arriver à les utiliser. Et avec 18 chapitres à couvrir, difficile de savoir par où commencer.</p>
   </section>
 
   <!-- ══ BLOC SOLUTION ══ -->
@@ -612,18 +559,6 @@
 
 </div><!-- /page -->
 
-<!-- ══ CTA FINAL (pleine largeur) ══ -->
-<div class="cta-section">
-  <p class="section-label">Prêt à commencer&thinsp;?</p>
-  <h2>Choisis ton point<br>de <em>départ</em></h2>
-  <p>Commence par ce qui te convient le mieux. Tu peux toujours revenir aux autres outils.</p>
-
-  <div class="cta-buttons">
-    <a href="https://dcgnancy.github.io/cartes-mentales-economie/" class="btn btn-outline-light">🗺️ Cartes mentales</a>
-    <a href="https://dcgnancy.github.io/economie-flashcards/" class="btn btn-light">🃏 Flashcards</a>
-    <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="btn btn-gold">📝 Commencer les quiz</a>
-  </div>
-</div>
 
 <div class="page">
   <footer>
