@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DCG · UE5 — Révisions</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>DCG · UE5 — Révisions Économie</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -15,16 +15,21 @@
       --rust: #c0522a;
       --sage: #4a7c6f;
       --paper: #faf7f2;
+      --muted: rgba(26,26,46,0.55);
+      --border: rgba(26,26,46,0.12);
     }
 
-    html, body {
-      height: 100%;
+    html { scroll-behavior: smooth; }
+
+    body {
       background: var(--paper);
       color: var(--ink);
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
+      line-height: 1.6;
     }
 
+    /* ── NOISE OVERLAY ── */
     body::before {
       content: '';
       position: fixed;
@@ -35,19 +40,26 @@
       opacity: 0.5;
     }
 
-    .page {
-      min-height: 100vh;
-      display: grid;
-      grid-template-rows: auto 1fr auto;
-      padding: 2rem clamp(1.5rem, 6vw, 5rem);
+    /* ── DECO LINE ── */
+    .deco-line {
+      position: fixed;
+      left: clamp(1.5rem, 6vw, 5rem);
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
+      pointer-events: none;
     }
 
+    /* ── LAYOUT ── */
+    .page { padding: 0 clamp(1.5rem, 6vw, 5rem); }
+
+    /* ── HEADER ── */
     header {
       display: flex;
       justify-content: space-between;
       align-items: baseline;
-      padding-bottom: 2rem;
-      border-bottom: 1px solid rgba(26,26,46,0.15);
+      padding: 2rem 0;
+      border-bottom: 1px solid var(--border);
       animation: fadeUp 0.6s ease both;
     }
 
@@ -62,59 +74,173 @@
       font-size: 0.78rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: rgba(26,26,46,0.45);
+      color: var(--muted);
       font-weight: 500;
     }
 
+    /* ── HERO ── */
     .hero {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 4rem 0 3rem;
+      padding: 5rem 0 4rem;
+      max-width: 700px;
       animation: fadeUp 0.7s 0.1s ease both;
     }
 
-    .hero-sub {
-      font-size: 0.8rem;
-      letter-spacing: 0.18em;
+    .hero-label {
+      font-size: 0.78rem;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
       color: var(--rust);
       font-weight: 500;
       margin-bottom: 1.2rem;
     }
 
-    h1 {
+    .hero h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
       font-weight: 900;
-      line-height: 0.95;
+      line-height: 1;
       letter-spacing: -0.02em;
       color: var(--ink);
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
 
-    h1 em {
+    .hero h1 em {
       font-style: italic;
       color: var(--sage);
     }
 
     .hero-desc {
-      font-size: 1rem;
+      font-size: 1.05rem;
       line-height: 1.7;
-      color: rgba(26,26,46,0.6);
-      max-width: 42ch;
+      color: var(--muted);
+      max-width: 48ch;
+      font-weight: 300;
+      margin-bottom: 2.2rem;
+    }
+
+    /* ── BUTTONS ── */
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      border-radius: 3px;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.85rem 2rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--sage);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(26,26,46,0.2);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--ink);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--ink);
+      background: var(--cream);
+    }
+
+    .btn-gold {
+      background: var(--gold);
+      color: white;
+      padding: 0.85rem 2rem;
+    }
+
+    .btn-gold:hover {
+      background: #b8943e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,168,76,0.3);
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 5rem 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 2.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      color: var(--ink);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    /* ── BLOC PROBLÈME ── */
+    .problems-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+
+    .problem-card {
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 1.8rem 1.5rem;
+      border-left: 3px solid var(--rust);
+    }
+
+    .problem-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .problem-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .problem-card p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.6;
       font-weight: 300;
     }
 
-    .cards {
+    /* ── BLOC SOLUTION ── */
+    .solutions-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      padding: 3rem 0;
-      animation: fadeUp 0.8s 0.2s ease both;
+      margin-top: 3rem;
     }
 
-    .card {
+    .solution-card {
       position: relative;
       background: var(--ink);
       border-radius: 4px;
@@ -123,50 +249,48 @@
       color: var(--cream);
       overflow: hidden;
       transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
     }
 
-    .card::before {
+    .solution-card::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.04));
     }
 
-    .card:hover {
-      transform: translateY(-6px);
+    .solution-card:hover {
+      transform: translateY(-5px);
       box-shadow: 0 20px 50px rgba(26,26,46,0.25);
     }
 
-    .card:hover .card-arrow { transform: translate(4px, -4px); }
+    .solution-card:hover .card-arrow { transform: translate(4px, -4px); }
 
-    .card-number {
+    .card-num {
       font-family: 'Playfair Display', serif;
       font-size: 5rem;
       font-weight: 900;
       line-height: 1;
-      opacity: 0.08;
+      opacity: 0.07;
       position: absolute;
       top: 1rem;
       right: 1.5rem;
-      letter-spacing: -0.05em;
     }
 
-    .card-icon {
+    .card-icon-lg {
       font-size: 1.8rem;
       margin-bottom: 1.5rem;
       display: block;
     }
 
-    .card-title {
+    .solution-card h3 {
       font-family: 'Playfair Display', serif;
-      font-size: 1.9rem;
+      font-size: 1.7rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      margin-bottom: 0.5rem;
       line-height: 1.1;
     }
 
-    .card-desc {
+    .solution-card p {
       font-size: 0.85rem;
       line-height: 1.6;
       opacity: 0.65;
@@ -183,7 +307,7 @@
     }
 
     .card-stat {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
       opacity: 0.5;
@@ -195,19 +319,129 @@
       opacity: 0.7;
     }
 
+    /* ── BLOC MÉTHODE ── */
+    .method-steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 0;
+      margin-top: 3rem;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .method-step {
+      padding: 2rem 1.8rem;
+      border-right: 1px solid var(--border);
+      position: relative;
+    }
+
+    .method-step:last-child { border-right: none; }
+
+    .step-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem;
+      font-weight: 900;
+      color: var(--gold);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: 0.8rem;
+    }
+
+    .method-step h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      color: var(--ink);
+    }
+
+    .method-step p {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    /* ── BLOC CTA FINAL ── */
+    .cta-section {
+      background: var(--ink);
+      margin: 0 calc(-1 * clamp(1.5rem, 6vw, 5rem));
+      padding: 5rem clamp(1.5rem, 6vw, 5rem);
+      text-align: center;
+    }
+
+    .cta-section .section-label {
+      color: rgba(245,240,232,0.4);
+    }
+
+    .cta-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 700;
+      color: var(--cream);
+      margin-bottom: 1rem;
+      line-height: 1.2;
+    }
+
+    .cta-section h2 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .cta-section p {
+      font-size: 0.95rem;
+      color: rgba(245,240,232,0.55);
+      margin-bottom: 2.5rem;
+      font-weight: 300;
+    }
+
+    .cta-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn-light {
+      background: var(--cream);
+      color: var(--ink);
+      padding: 0.85rem 1.8rem;
+      font-weight: 500;
+    }
+
+    .btn-light:hover {
+      background: white;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline-light {
+      background: transparent;
+      color: var(--cream);
+      border: 1px solid rgba(245,240,232,0.3);
+      padding: 0.85rem 1.8rem;
+    }
+
+    .btn-outline-light:hover {
+      border-color: var(--cream);
+      background: rgba(245,240,232,0.08);
+    }
+
+    /* ── FOOTER ── */
     footer {
-      border-top: 1px solid rgba(26,26,46,0.1);
-      padding-top: 1.5rem;
-      padding-bottom: 1rem;
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      animation: fadeUp 0.9s 0.3s ease both;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
 
     .footer-text {
       font-size: 0.75rem;
-      color: rgba(26,26,46,0.35);
+      color: var(--muted);
       letter-spacing: 0.05em;
     }
 
@@ -231,24 +465,20 @@
       font-weight: 500;
     }
 
-    .deco-line {
-      position: fixed;
-      left: clamp(1.5rem, 6vw, 5rem);
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
-      pointer-events: none;
-    }
-
+    /* ── ANIMATIONS ── */
     @keyframes fadeUp {
       from { opacity: 0; transform: translateY(18px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    @media (max-width: 500px) {
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
       .chapter-pills { display: none; }
-      h1 { font-size: 3rem; }
+      .method-steps { grid-template-columns: 1fr; }
+      .method-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .method-step:last-child { border-bottom: none; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+      .btn { text-align: center; width: 100%; max-width: 280px; }
     }
   </style>
 </head>
@@ -257,58 +487,147 @@
 <div class="deco-line"></div>
 
 <div class="page">
+
+  <!-- ── HEADER ── -->
   <header>
     <span class="logo">DCG · UE5</span>
     <span class="tagline">Économie — 18 chapitres</span>
   </header>
 
-  <main>
-    <section class="hero">
-      <p class="hero-sub">Espace de révision</p>
-      <h1>Révise.<br><em>Progresse.</em><br>Réussis.</h1>
-      <p class="hero-desc">Trois outils pensés pour aller à l'essentiel — mémoriser, s'entraîner, visualiser. Tout ce qu'il faut pour aborder l'UE5 avec méthode et confiance.</p>
-    </section>
+  <!-- ══ HERO ══ -->
+  <section class="hero" style="border-top: none; padding-top: 5rem;">
+    <p class="hero-label">Espace de révision</p>
+    <h1>Tu révises.<br><em>Tu t'évalues.</em><br>Tu progresses.</h1>
+    <p class="hero-desc">Des outils simples pour comprendre le cours, mémoriser les notions et vérifier ta progression — chapitre par chapitre.</p>
+    <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="btn btn-primary">Accéder aux quiz →</a>
+  </section>
 
-    <div class="cards">
+  <!-- ══ BLOC PROBLÈME ══ -->
+  <section>
+    <p class="section-label">Le constat</p>
+    <h2 class="section-title">Ce que vivent<br>beaucoup d'étudiants</h2>
 
-      <a href="https://dcgnancy.github.io/economie-flashcards/" class="card card--flash">
-        <span class="card-number">01</span>
-        <span class="card-icon">🃏</span>
-        <h2 class="card-title">Flash­cards</h2>
-        <p class="card-desc">Mémorisez les définitions, concepts et mécanismes essentiels. Recto-verso, chapitre par chapitre.</p>
-        <div class="card-footer">
-          <span class="card-stat">297 cartes · 18 chapitres</span>
-          <span class="card-arrow">↗</span>
-        </div>
-      </a>
+    <div class="problems-grid">
 
-      <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="card card--quiz">
-        <span class="card-number">02</span>
-        <span class="card-icon">📝</span>
-        <h2 class="card-title">Quiz</h2>
-        <p class="card-desc">Testez vos connaissances avec des questions à choix multiples. Corrigé immédiat et score final.</p>
-        <div class="card-footer">
-          <span class="card-stat">QCM · par chapitre</span>
-          <span class="card-arrow">↗</span>
-        </div>
-      </a>
+      <div class="problem-card">
+        <span class="problem-icon">😶</span>
+        <h3>« Je ne sais pas où j'en suis »</h3>
+        <p>Difficile d'évaluer sa maîtrise d'un chapitre sans un retour objectif.</p>
+      </div>
 
-      <a href="https://dcgnancy.github.io/cartes-mentales-economie/" class="card card--maps">
-        <span class="card-number">03</span>
-        <span class="card-icon">🗺️</span>
-        <h2 class="card-title">Cartes mentales</h2>
-        <p class="card-desc">Visualisez la structure de chaque chapitre en un coup d'œil. Idéal pour consolider et réviser rapidement.</p>
+      <div class="problem-card">
+        <span class="problem-icon">😕</span>
+        <h3>« Je lis, mais je ne comprends pas »</h3>
+        <p>Le cours semble clair à la lecture, mais les raisonnements ne s'ancrent pas.</p>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-icon">😞</span>
+        <h3>« J'apprends, mais je n'arrive pas à appliquer »</h3>
+        <p>Connaître une définition ne suffit pas. Il faut s'entraîner à l'utiliser.</p>
+      </div>
+
+      <div class="problem-card">
+        <span class="problem-icon">😰</span>
+        <h3>« Je n'ai pas le temps de tout réviser »</h3>
+        <p>18 chapitres, c'est beaucoup. Sans méthode, on tourne en rond.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ BLOC SOLUTION ══ -->
+  <section>
+    <p class="section-label">La solution</p>
+    <h2 class="section-title">Trois outils,<br>un seul objectif : <em>progresser</em></h2>
+
+    <div class="solutions-grid">
+
+      <!-- Cartes mentales (gauche) -->
+      <a href="https://dcgnancy.github.io/cartes-mentales-economie/" class="solution-card">
+        <span class="card-num">01</span>
+        <span class="card-icon-lg">🗺️</span>
+        <h3>Cartes mentales</h3>
+        <p>Visualise la structure de chaque chapitre. Idéal pour comprendre les liens entre les concepts avant d'apprendre.</p>
         <div class="card-footer">
           <span class="card-stat">18 cartes · 7 thèmes</span>
           <span class="card-arrow">↗</span>
         </div>
       </a>
 
-    </div>
-  </main>
+      <!-- Flashcards (milieu) -->
+      <a href="https://dcgnancy.github.io/economie-flashcards/" class="solution-card">
+        <span class="card-num">02</span>
+        <span class="card-icon-lg">🃏</span>
+        <h3>Flash­cards</h3>
+        <p>Apprends tes définitions et mécanismes essentiels. Recto-verso, chapitre par chapitre, à ton rythme.</p>
+        <div class="card-footer">
+          <span class="card-stat">297 cartes · 18 chapitres</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
 
+      <!-- Quiz (droite) -->
+      <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="solution-card">
+        <span class="card-num">03</span>
+        <span class="card-icon-lg">📝</span>
+        <h3>Quiz</h3>
+        <p>Teste tes connaissances avec des QCM par niveau de difficulté. Tu sais exactement ce que tu maîtrises — et ce qu'il reste à travailler.</p>
+        <div class="card-footer">
+          <span class="card-stat">QCM · niveaux de difficulté</span>
+          <span class="card-arrow">↗</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <!-- ══ BLOC MÉTHODE ══ -->
+  <section>
+    <p class="section-label">La méthode</p>
+    <h2 class="section-title">Comment ça <em>fonctionne</em>&thinsp;?</h2>
+
+    <div class="method-steps">
+
+      <div class="method-step">
+        <div class="step-number">1</div>
+        <h3>Tu t'entraînes</h3>
+        <p>Tu travailles un chapitre avec les cartes mentales, les flashcards ou les quiz. Pas besoin de tout faire en même temps.</p>
+      </div>
+
+      <div class="method-step">
+        <div class="step-number">2</div>
+        <h3>Tu identifies tes erreurs</h3>
+        <p>Le quiz te montre immédiatement ce que tu n'as pas encore maîtrisé. Pas de mauvaise surprise le jour J.</p>
+      </div>
+
+      <div class="method-step">
+        <div class="step-number">3</div>
+        <h3>Tu progresses</h3>
+        <p>Tu reviens sur les points faibles. Tu avances. Chapitre après chapitre, ta confiance augmente.</p>
+      </div>
+
+    </div>
+  </section>
+
+</div><!-- /page -->
+
+<!-- ══ CTA FINAL (pleine largeur) ══ -->
+<div class="cta-section">
+  <p class="section-label">Prêt à commencer&thinsp;?</p>
+  <h2>Choisis ton point<br>de <em>départ</em></h2>
+  <p>Commence par ce qui te convient le mieux. Tu peux toujours revenir aux autres outils.</p>
+
+  <div class="cta-buttons">
+    <a href="https://dcgnancy.github.io/cartes-mentales-economie/" class="btn btn-outline-light">🗺️ Cartes mentales</a>
+    <a href="https://dcgnancy.github.io/economie-flashcards/" class="btn btn-light">🃏 Flashcards</a>
+    <a href="https://dcgnancy.github.io/quizz-revisions-economie/" class="btn btn-gold">📝 Commencer les quiz</a>
+  </div>
+</div>
+
+<div class="page">
   <footer>
-    <span class="footer-text">DCG — Unité d'enseignement 5</span>
+    <span class="footer-text">DCG — Unité d'enseignement 5 · Économie</span>
     <div class="chapter-pills">
       <div class="pill">1</div><div class="pill">2</div><div class="pill">3</div>
       <div class="pill">4</div><div class="pill">5</div><div class="pill">6</div>
