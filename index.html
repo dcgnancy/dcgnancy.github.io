@@ -196,14 +196,21 @@
       color: var(--sage);
     }
 
-    /* ── BLOC PROBLÈME ── */
-    .problems-text {
-      font-size: 1rem;
-      line-height: 1.75;
+    /* ── BANDEAU CONSTAT ── */
+    .banner-constat {
+      background: var(--cream);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.9rem clamp(1.5rem, 6vw, 5rem);
+      font-size: 0.88rem;
       color: var(--muted);
-      max-width: 60ch;
       font-weight: 300;
-      margin-top: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .banner-constat strong {
+      color: var(--rust);
+      font-weight: 500;
     }
 
     /* ── BLOC SOLUTION ── */
@@ -475,16 +482,17 @@
     <p class="hero-desc">Des outils simples pour comprendre le cours, mémoriser les notions et vérifier ta progression — chapitre par chapitre.</p>
   </section>
 
-  <!-- ══ BLOC PROBLÈME ══ -->
-  <section>
-    <p class="section-label">Le constat</p>
-    <h2 class="section-title">Ce que vivent<br>beaucoup d'étudiants</h2>
+</div><!-- /page hero -->
 
-    <p class="problems-text">Difficile de savoir si on est vraiment prêt quand on révise seul. On lit le cours, on croit avoir compris, mais au moment de répondre à une question, ça bloque. On apprend des définitions sans arriver à les utiliser. Et avec 18 chapitres à couvrir, difficile de savoir par où commencer.</p>
-  </section>
+<!-- ══ BANDEAU CONSTAT ══ -->
+<div class="banner-constat">
+  <strong>Le constat :</strong> On lit le cours, on croit avoir compris — mais au moment de répondre, ça bloque. On apprend des définitions sans arriver à les utiliser. Avec 18 chapitres, difficile de savoir où on en est vraiment.
+</div>
+
+<div class="page">
 
   <!-- ══ BLOC SOLUTION ══ -->
-  <section>
+  <section style="border-top: none;">
     <p class="section-label">La solution</p>
     <h2 class="section-title">Trois outils,<br>un seul objectif : <em>progresser</em></h2>
 
@@ -557,10 +565,6 @@
     </div>
   </section>
 
-</div><!-- /page -->
-
-
-<div class="page">
   <footer>
     <span class="footer-text">DCG — Unité d'enseignement 5 · Économie</span>
     <div class="chapter-pills">
