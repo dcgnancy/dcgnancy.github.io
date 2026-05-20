@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F51TDGR55K"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-F51TDGR55K');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact — DCG UE5</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:    #1a1a2e;
+      --cream:  #f5f0e8;
+      --gold:   #c9a84c;
+      --rust:   #c0522a;
+      --sage:   #4a7c6f;
+      --paper:  #faf7f2;
+      --border: rgba(26,26,46,0.12);
+      --muted:  rgba(26,26,46,0.45);
+      --error:  #c0522a;
+      --success:#4a7c6f;
+    }
+
+    html, body {
+      min-height: 100%;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── Texture de fond ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 999;
+      opacity: 0.5;
+    }
+
+    /* ── Ligne décorative ── */
+    .deco-line {
+      position: fixed;
+      left: clamp(1.5rem, 6vw, 5rem);
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(201,168,76,0.3) 30%, rgba(201,168,76,0.3) 70%, transparent);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Layout ── */
+    .page {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      padding: 0 clamp(1.5rem, 6vw, 5rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Bandeau objectif ── */
+    .objective-banner {
+      background: var(--ink);
+      color: var(--cream);
+      padding: 0.9rem clamp(1.5rem, 6vw, 5rem);
+      margin: 0 calc(-1 * clamp(1.5rem, 6vw, 5rem));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      animation: fadeDown 0.5s ease both;
+    }
+
+    .objective-left {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .objective-badge {
+      background: var(--gold);
+      color: var(--ink);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.7rem;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .objective-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .objective-promise {
+      font-size: 0.78rem;
+      color: var(--gold);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-align: right;
+      opacity: 0.9;
+    }
+
+    .objective-promise strong {
+      color: #fff;
+      font-weight: 700;
+    }
+
+    /* ── Header ── */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 1.6rem 0;
+      border-bottom: 1px solid var(--border);
+      animation: fadeUp 0.6s 0.1s ease both;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.08em;
+      color: var(--gold);
+      text-decoration: none;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: baseline;
+      gap: 2rem;
+    }
+
+    .tagline {
+      font-size: 0.78rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+    }
+
+    .back-btn {
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      transition: color 0.2s ease;
+    }
+
+    .back-btn:hover { color: var(--ink); }
+
+    /* ── Main ── */
+    main {
+      padding: 3.5rem 0 4rem;
+      animation: fadeUp 0.7s 0.15s ease both;
+    }
+
+    /* ── Intro ── */
+    .contact-intro {
+      margin-bottom: 3rem;
+    }
+
+    .hero-sub {
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rust);
+      font-weight: 500;
+      margin-bottom: 0.8rem;
+    }
+
+    .contact-intro h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .contact-intro h1 em {
+      font-style: italic;
+      color: var(--sage);
+    }
+
+    .contact-intro p {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: var(--muted);
+      max-width: 48ch;
+      font-weight: 300;
+    }
+
+    /* ── Grille formulaire ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    /* ── Infos gauche ── */
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .info-block {
+      border-left: 2px solid rgba(201,168,76,0.3);
+      padding-left: 1rem;
+    }
+
+    .info-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 0.3rem;
+    }
+
+    .info-value {
+      font-size: 0.88rem;
+      color: var(--ink);
+      font-weight: 400;
+      line-height: 1.5;
+    }
+
+    /* ── Formulaire ── */
+    .form-card {
+      background: var(--ink);
+      border-radius: 4px;
+      padding: 2.5rem 2.5rem 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .form-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent 60%, rgba(255,255,255,0.03));
+      pointer-events: none;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    @media (max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+      .form-card { padding: 1.8rem 1.5rem 1.5rem; }
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .form-group.full { grid-column: 1 / -1; }
+
+    label {
+      font-size: 0.7rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,240,232,0.5);
+      font-weight: 500;
+    }
+
+    label .required {
+      color: var(--gold);
+      margin-left: 2px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 3px;
+      padding: 0.75rem 1rem;
+      color: var(--cream);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.2s ease, background 0.2s ease;
+      width: 100%;
+      -webkit-appearance: none;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+      color: rgba(245,240,232,0.25);
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: rgba(201,168,76,0.6);
+      background: rgba(255,255,255,0.07);
+    }
+
+    input.error,
+    textarea.error,
+    select.error {
+      border-color: rgba(192,82,42,0.7);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    select {
+      cursor: pointer;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23c9a84c' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 2rem;
+    }
+
+    select option {
+      background: #1a1a2e;
+      color: var(--cream);
+    }
+
+    .field-error {
+      font-size: 0.7rem;
+      color: rgba(192,82,42,0.9);
+      letter-spacing: 0.04em;
+      min-height: 1rem;
+    }
+
+    /* ── Honeypot (anti-spam, invisible) ── */
+    .hp-field {
+      position: absolute;
+      left: -9999px;
+      opacity: 0;
+      pointer-events: none;
+      tab-index: -1;
+    }
+
+    /* ── RGPD ── */
+    .rgpd-block {
+      margin-bottom: 1.5rem;
+      padding: 1rem;
+      background: rgba(255,255,255,0.04);
+      border-radius: 3px;
+      border: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+    }
+
+    .checkbox-label input[type="checkbox"] {
+      width: 16px;
+      min-width: 16px;
+      height: 16px;
+      margin-top: 2px;
+      accent-color: var(--gold);
+      cursor: pointer;
+      border: none;
+      padding: 0;
+    }
+
+    .checkbox-text {
+      font-size: 0.75rem;
+      color: rgba(245,240,232,0.55);
+      line-height: 1.6;
+      font-weight: 300;
+    }
+
+    .checkbox-text a {
+      color: var(--gold);
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .checkbox-text a:hover { opacity: 0.8; }
+
+    .rgpd-error {
+      font-size: 0.7rem;
+      color: rgba(192,82,42,0.9);
+      margin-top: 0.5rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* ── Mentions RGPD sous le form ── */
+    .rgpd-mentions {
+      font-size: 0.68rem;
+      color: rgba(245,240,232,0.3);
+      line-height: 1.6;
+      margin-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.07);
+      padding-top: 1rem;
+    }
+
+    /* ── Bouton envoi ── */
+    .btn-submit {
+      width: 100%;
+      padding: 0.9rem 1.5rem;
+      background: var(--gold);
+      color: var(--ink);
+      border: none;
+      border-radius: 3px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.6rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .btn-submit:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-2px);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-submit .spinner {
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(26,26,46,0.3);
+      border-top-color: var(--ink);
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+      display: none;
+    }
+
+    .btn-submit.loading .spinner { display: block; }
+    .btn-submit.loading .btn-text { display: none; }
+
+    /* ── Messages retour ── */
+    .form-feedback {
+      display: none;
+      padding: 1rem 1.2rem;
+      border-radius: 3px;
+      font-size: 0.82rem;
+      font-weight: 400;
+      line-height: 1.5;
+      margin-top: 0.8rem;
+      animation: fadeUp 0.4s ease both;
+    }
+
+    .form-feedback.success {
+      background: rgba(74,124,111,0.15);
+      border: 1px solid rgba(74,124,111,0.4);
+      color: #7ec5b5;
+    }
+
+    .form-feedback.error-msg {
+      background: rgba(192,82,42,0.12);
+      border: 1px solid rgba(192,82,42,0.35);
+      color: rgba(245,240,232,0.8);
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 1.5rem 0 1rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      animation: fadeUp 0.9s 0.35s ease both;
+    }
+
+    .copyright-text {
+      font-size: 0.68rem;
+      color: var(--muted);
+      letter-spacing: 0.02em;
+      line-height: 1.6;
+      max-width: 70ch;
+      text-align: right;
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 500px) {
+      .objective-promise { display: none; }
+      .header-right .tagline { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="deco-line"></div>
+
+<div class="page">
+
+  <!-- Bandeau objectif -->
+  <div class="objective-banner">
+    <div class="objective-left">
+      <span class="objective-badge">Méthode DCG</span>
+      <span class="objective-title">UE 5 — Économie</span>
+    </div>
+    <span class="objective-promise">Gagnez jusqu'à <strong>+4 points</strong> au-dessus de la moyenne nationale à l'épreuve</span>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <a href="https://methodedcg-ue5.github.io" class="logo">Objectif UE5</a>
+    <div class="header-right">
+      <span class="tagline">Économie — 18 chapitres</span>
+      <a href="https://methodedcg-ue5.github.io" class="back-btn">← Accueil</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- Intro -->
+    <div class="contact-intro">
+      <p class="hero-sub">Formulaire de contact</p>
+      <h1>Une question ?<br><em>Écrivez-moi.</em></h1>
+      <p>Pour toute question sur les ressources, le coaching ou le programme, je vous réponds dans les meilleurs délais.</p>
+    </div>
+
+    <!-- Grille -->
+    <div class="contact-grid">
+
+      <!-- Infos -->
+      <aside class="contact-info" aria-label="Informations de contact">
+        <div class="info-block">
+          <p class="info-label">Réponse</p>
+          <p class="info-value">Sous 48h ouvrées</p>
+        </div>
+        <div class="info-block">
+          <p class="info-label">Sujets traités</p>
+          <p class="info-value">Questions sur les cours<br>Coaching DCG UE5<br>Partenariats</p>
+        </div>
+        <div class="info-block">
+          <p class="info-label">Confidentialité</p>
+          <p class="info-value">Vos données ne sont utilisées que pour vous répondre et ne sont jamais revendues.</p>
+        </div>
+      </aside>
+
+      <!-- Formulaire -->
+      <div class="form-card" role="region" aria-label="Formulaire de contact">
+        <div data-fs-success style="display:none"></div>
+        <div data-fs-error style="display:none"></div>
+        <form
+          id="contactForm"
+          action="https://formspree.io/f/mgoqakqo"
+          method="POST"
+          novalidate
+        >
+          <!-- Honeypot anti-spam -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="hp_website">Ne pas remplir</label>
+            <input type="text" id="hp_website" name="_gotcha" tabindex="-1" autocomplete="off"/>
+          </div>
+
+          <!-- Champ caché : redirection après envoi désactivée (gérée en JS) -->
+          <input type="hidden" name="_next" value="false"/>
+
+          <!-- Ligne Prénom / Nom -->
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prenom">Prénom <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="prenom"
+                name="prenom"
+                data-fs-field
+                placeholder="Votre prénom"
+                autocomplete="given-name"
+                aria-required="true"
+              />
+              <span class="field-error" id="err-prenom" role="alert" aria-live="polite"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="nom">Nom <span class="required" aria-hidden="true">*</span></label>
+              <input
+                type="text"
+                id="nom"
+                name="nom"
+                data-fs-field
+                placeholder="Votre nom"
+                autocomplete="family-name"
+                aria-required="true"
+              />
+              <span class="field-error" id="err-nom" role="alert" aria-live="polite"></span>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="form-group">
+            <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="votre@email.fr"
+              autocomplete="email"
+              aria-required="true"
+            />
+            <span class="field-error" id="err-email" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Sujet -->
+          <div class="form-group">
+            <label for="sujet">Sujet <span class="required" aria-hidden="true">*</span></label>
+            <select id="sujet" name="sujet" aria-required="true" data-fs-field>
+              <option value="" disabled selected>Choisissez un sujet…</option>
+              <option value="Question sur les quiz">Question sur les quiz</option>
+              <option value="Question sur les flashcards">Question sur les flashcards</option>
+              <option value="Question sur les cours">Question sur les cours</option>
+              <option value="Coaching DCG UE5">Coaching DCG UE5</option>
+              <option value="Problème technique">Problème technique</option>
+              <option value="Partenariat">Partenariat</option>
+              <option value="Autre">Autre</option>
+            </select>
+            <span class="field-error" id="err-sujet" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- Message -->
+          <div class="form-group">
+            <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+            <textarea
+              id="message"
+              name="message"
+              placeholder="Décrivez votre demande…"
+              aria-required="true"
+              rows="5"
+            ></textarea>
+            <span class="field-error" id="err-message" role="alert" aria-live="polite"></span>
+          </div>
+
+          <!-- RGPD -->
+          <div class="rgpd-block">
+            <label class="checkbox-label">
+              <input type="checkbox" id="rgpd" name="rgpd" aria-required="true"/>
+              <span class="checkbox-text">
+                J'accepte que les informations saisies soient utilisées pour me recontacter
+                dans le cadre de ma demande, conformément à la
+                <a href="politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.
+                <br>Ces données ne seront pas conservées au-delà du traitement de ma demande.
+              </span>
+            </label>
+            <p class="rgpd-error" id="err-rgpd" role="alert" aria-live="polite"></p>
+          </div>
+
+          <!-- Bouton envoi -->
+          <button type="submit" class="btn-submit" id="btnSubmit" data-fs-submit-btn>
+            <span class="btn-text">Envoyer le message →</span>
+            <span class="spinner" aria-hidden="true"></span>
+          </button>
+
+          <!-- Feedback -->
+          <div class="form-feedback success" id="feedbackSuccess" role="status" aria-live="polite">
+            ✓ Votre demande a bien été envoyée. Je vous répondrai sous 48h ouvrées.
+          </div>
+          <div class="form-feedback error-msg" id="feedbackError" role="alert" aria-live="polite">
+            Une erreur est survenue lors de l'envoi. Veuillez réessayer ou me contacter directement.
+          </div>
+
+          <!-- Mentions RGPD -->
+          <p class="rgpd-mentions">
+            Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression
+            de vos données. Pour exercer ces droits, contactez : profecomanagestion@gmail.com.
+            Les données collectées (nom, email, message) sont utilisées uniquement pour répondre
+            à votre demande et ne sont jamais transmises à des tiers.
+          </p>
+        </form>
+      </div>
+
+    </div>
+  </main>
+
+  <footer>
+    <p class="copyright-text">© 2026 – Marie Duval – Tous droits réservés.<br>
+    L'ensemble des contenus est protégé par le droit d'auteur conformément au Code de la propriété intellectuelle.</p>
+  </footer>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════
+   FORMULAIRE DE CONTACT — Validation + Formspree
+   ══════════════════════════════════════════════════════ */
+
+const form       = document.getElementById('contactForm');
+const btnSubmit  = document.getElementById('btnSubmit');
+const fbSuccess  = document.getElementById('feedbackSuccess');
+const fbError    = document.getElementById('feedbackError');
+
+/* ── Validation d'un champ ── */
+function validateField(id, errorId, validationFn) {
+  const el  = document.getElementById(id);
+  const err = document.getElementById(errorId);
+  const msg = validationFn(el.value.trim());
+  if (msg) {
+    el.classList.add('error');
+    err.textContent = msg;
+    return false;
+  }
+  el.classList.remove('error');
+  err.textContent = '';
+  return true;
+}
+
+/* ── Règles de validation ── */
+const rules = {
+  nom:     v => !v ? 'Veuillez saisir votre nom.' : v.length < 2 ? 'Nom trop court.' : '',
+  email:   v => !v ? 'Veuillez saisir votre email.' : !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v) ? 'Format d\'email invalide.' : '',
+  sujet:   v => !v ? 'Veuillez choisir un sujet.' : '',
+  message: v => !v ? 'Veuillez saisir votre message.' : v.length < 10 ? 'Message trop court (10 caractères minimum).' : '',
+};
+
+/* ── Validation en temps réel (au blur) ── */
+['prenom', 'nom', 'email', 'sujet', 'message'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('blur', () => validateField(id, `err-${id}`, rules[id]));
+  el.addEventListener('input', () => {
+    if (el.classList.contains('error')) validateField(id, `err-${id}`, rules[id]);
+  });
+});
+
+/* ── Soumission ── */
+form.addEventListener('submit', async function(e) {
+  e.preventDefault();
+
+  // Validation complète
+  let valid = true;
+  ['prenom', 'nom', 'email', 'sujet', 'message'].forEach(id => {
+    if (!validateField(id, `err-${id}`, rules[id])) valid = false;
+  });
+
+  // RGPD
+  const rgpd    = document.getElementById('rgpd');
+  const errRgpd = document.getElementById('err-rgpd');
+  if (!rgpd.checked) {
+    errRgpd.textContent = 'Vous devez accepter la politique de confidentialité.';
+    valid = false;
+  } else {
+    errRgpd.textContent = '';
+  }
+
+  if (!valid) return;
+
+  // Honeypot : si rempli, on abandonne silencieusement
+  const hp = document.getElementById('hp_website');
+  if (hp && hp.value) return;
+
+  // Envoi
+  btnSubmit.disabled = true;
+  btnSubmit.classList.add('loading');
+  fbSuccess.style.display = 'none';
+  fbError.style.display   = 'none';
+
+  try {
+    const data = new FormData(form);
+    const response = await fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    });
+
+    if (response.ok) {
+      // Succès
+      form.reset();
+      ['prenom', 'nom', 'email', 'sujet', 'message'].forEach(id => {
+        document.getElementById(id).classList.remove('error');
+        document.getElementById(`err-${id}`).textContent = '';
+      });
+      errRgpd.textContent = '';
+      fbSuccess.style.display = 'block';
+      fbSuccess.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    } else {
+      throw new Error('Réponse serveur non OK');
+    }
+  } catch (err) {
+    fbError.style.display = 'block';
+    fbError.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.classList.remove('loading');
+  }
+});
+</script>
+
+
+<script>
+  window.formspree = window.formspree || function () { (formspree.q = formspree.q || []).push(arguments); };
+  formspree('initForm', { formElement: '#contactForm', formId: 'mgoqakqo' });
+</script>
+<script src="https://unpkg.com/@formspree/ajax@1" defer></script>
+</body>
+</html>
